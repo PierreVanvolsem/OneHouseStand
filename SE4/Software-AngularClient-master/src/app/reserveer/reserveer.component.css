@@ -1,0 +1,46 @@
+ul {
+  list-style: none
+}
+
+img {
+    height: 30%;
+}
+
+.carousel {
+    margin-left: 50%;
+    transform: translate(-50%,0);
+    position: relative;
+}
+
+h2 {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+form {
+    width: 40%;
+    margin-left: 50%;
+    transform: translate(-50%,0);
+    position: relative;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+form input {
+    width: 100%;
+    margin-left: 50%;
+    transform: translate(-50%,0);
+    position: relative;
+}
+
+form button {
+    width: 100%;
+    position: relative;
+}
+
+.alert {
+    position: fixed;
+    bottom: 0px;
+    left: 50%;
+    transform: translate(-50%,0);
+}

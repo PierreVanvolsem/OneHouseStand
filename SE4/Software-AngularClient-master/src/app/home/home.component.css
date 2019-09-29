@@ -1,0 +1,24 @@
+* {
+    box-sizing: border-box;
+  }
+
+ul {
+  list-style: none;
+}
+
+.houses {
+    margin: 5% 10%;
+
+}
+
+.card {
+    width: 18rem;
+    margin: 2rem;
+    float: left;
+    transition: 0.3s;
+} 
+
+.card:hover {
+    transform: scale(1.048)
+} 
+

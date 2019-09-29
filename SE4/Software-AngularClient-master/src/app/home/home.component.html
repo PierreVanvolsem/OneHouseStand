@@ -1,0 +1,18 @@
+<div style="text-align:center">
+  <h2>
+    Lijst van beschikbare panden
+  </h2>
+  <p>{{error}}</p>
+</div>
+<section class="houses">
+  <div *ngFor="let house of houses; let i = index" class="card">
+    <img class="card-img-top" src="https://odis.homeaway.com/odis/listing/7e04139f-1678-4a69-a9dc-d86be6bd80c6.c10.jpg"
+      alt="Villa with swimming pool">
+    <div class="card-body text-center">
+      <h5 class="card-title">Huis [{{house.id}}] - {{house.prijsPerUur | currency : '€'}}/u</h5>
+      <p class="card-text">Locatie: {{house.straatNaam}} {{house.huisNummer}}</p>
+      <a [routerLink]="['/reserveer', house.id]" routerLinkActive="active" class="btn btn-primary">Reserveer</a>
+    </div>
+  </div>
+</section>
+<router-outlet></router-outlet>

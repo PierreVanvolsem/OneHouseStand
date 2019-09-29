@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mat Toevoegen</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
+</head>
+<body>
+<div class="container">
+    <div class="text-left">
+        <div th:replace="fragments/header :: header">Header</div>
+        <h1>Nieuwe Mat Toevoegen</h1>
+        <form method="post" th:action="@{/syndicus/matToevoegen(id=${pand.id})}" th:object="${mat}">
+            <label for="matAankoopPrijs">AankoopPrijs</label>
+            <input type="text" id="matAankoopPrijs" th:field="*{aankoopPrijs}">
+            <br>
+            <label for="matProductNummer">Product nummer:</label>
+            <input type="number" id="matProductNummer" th:field="*{productNummer}">
+            <br>
+            <input class="submit" type="submit" name="submit" value="Mat Toevoegen">
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
