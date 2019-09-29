@@ -1,0 +1,30 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Panden</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+<div th:replace="fragments/header :: header">Header</div>
+
+<div class="container">
+    <div style="text-align: center">
+        <h1>Lijst van panden</h1>
+        <a th:href="@{/klant/pandToevoegen}">Nieuw pand</a>
+        <ul style="list-style-type: none;">
+            <li th:each=" pand : ${lijstPanden}">
+                <a th:href="@{/pand(id=${pand.getId()})}" contenteditable="false">
+                    <span th:text="${pand.getId()}" contenteditable="false">Loading...</span> |
+                    <span th:text="${pand.getStatus()}" contenteditable="false">Loading...</span> |
+                    <span th:text="${pand.getPrijsPerUur()}" contenteditable="false">Loading...</span> Euro/uur
+                </a>
+
+            </li>
+        </ul>
+    </div>
+
+</div>
+</body>
+</html>

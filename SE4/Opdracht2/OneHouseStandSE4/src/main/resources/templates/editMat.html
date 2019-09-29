@@ -1,0 +1,41 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
+</head>
+<body>
+<div class="container">
+    <div class="text-left">
+        <div th:replace="fragments/header :: header">Header</div>
+
+        <h1>Mat</h1>
+        <div class="container">
+            <form method="post" th:action="@{/syndicus/toonMatten}" th:object="${mat}">
+                <label for="matAankoopPrijs">matAankoopPrijs</label>
+                <input disabled type="text" id="matAankoopPrijs"  th:field="*{aankoopPrijs}">
+                <br>
+                <label for="matLaatstGecheckt">matLaatstGecheckt</label>
+                <input disabled type="text" id="matLaatstGecheckt" th:field="*{laatstGecheckt}">
+                <br>
+                <label for="matProductNummer">matProductNummer</label>
+                <input disabled type="number" id="matProductNummer" th:field="*{productNummer}" >
+                <br>
+                <label for="matStatus">matStatus</label>
+                <input type="text" id="matStatus" th:field="*{status}">
+                <br>
+            </form>
+
+            <form method="post" th:action="@{/syndicus/herstelMat(id=${mat.id})}">
+                <input type="submit" value="Herstel Mat">
+            </form>
+
+            <form method="post" th:action="@{/syndicus/zetMatAlsVersleten(id=${mat.id})}">
+                <input type="submit" value="Markeer Mat als versleten">
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
