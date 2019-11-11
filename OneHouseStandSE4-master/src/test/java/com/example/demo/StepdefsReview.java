@@ -70,17 +70,17 @@ public class StepdefsReview {
 
     @En("^het systeem verwerkt de review$")
     public void hetSysteemVerwerktDeReview() {
-        ohsServiceImplementatie.processReview(review,pand.getId(),tibo);
+        review = ohsServiceImplementatie.processReview(review,pand.getId(),tibo);
     }
 
-    /*@En("^het systeem beschouwt de review als verwerkt$")
+    @En("^het systeem beschouwt de review als verwerkt$")
     public void hetSysteemBeschouwtDeReviewAlsVerwerkt() {
 
-    }*/
+    }
 
     @En("^de screener verbergt de review$")
     public void deScreenerVerbergtDeReview() {
-        ohsServiceImplementatie.verbergReview(review,tibo);
+        review = ohsServiceImplementatie.verbergReview(review,tibo);
     }
 
     @En("^de pand van de review wordt gearchiveerd\\.$")
@@ -91,6 +91,6 @@ public class StepdefsReview {
     @Dan("^zal de verwerkte review final zijn\\.$")
     public void zalDeVerwerkteReviewFinalZijn() {
         //todo make final
-        assertEquals(review.getStatus(), "Verborgen");
+        assertEquals("Verborgen",review.getStatus());
     }
 }
