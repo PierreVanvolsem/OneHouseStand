@@ -40,6 +40,9 @@ public class Review {
     @ManyToOne
     private User gebruiker;
 
+    @Column
+    private String status = "Onverwerkt";
+
 	public String getTitel()
 	{
 		return titel;
@@ -64,6 +67,33 @@ public class Review {
     {
         return rating;
     }
+    public String getStatus() { return status; }
+
+    public void setTitel(String titel) {
+        this.titel = titel;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setDatum(String datum) {
+        this.datum = datum;
+    }
+
+    public void setGebruiker(User gebruiker) {
+        this.gebruiker = gebruiker;
+    }
+
+    public void setPand(Pand pand) {
+        this.pand = pand;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public void setStatus(String status) { this.status = status; }
 
     @ManyToOne
     @JsonBackReference

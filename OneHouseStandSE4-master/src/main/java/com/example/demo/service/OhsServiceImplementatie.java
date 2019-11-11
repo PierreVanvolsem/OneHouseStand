@@ -172,6 +172,22 @@ public class OhsServiceImplementatie implements OhsService {
         return r;
     }
 
+    @Override
+    public Review verbergReview(Review review, User user)
+    {
+        //TODO Nakijken of user wel een screener is.
+        review.setStatus("Verborgen");
+        return review;
+    }
+
+    @Override
+    public Review verwerkReview(Review review, User user)
+    {
+        //TODO Nakijken of user wel een screener is.
+        review.setStatus("Verwerkt");
+        return review;
+    }
+
     @Override //TODO: add pand to review
     public Review processReview(Review r, long pandId, User u) {
         Pand pand = geefPand((int) pandId);
@@ -179,6 +195,7 @@ public class OhsServiceImplementatie implements OhsService {
         r.setPand(pand);
         r.setGebruiker(u);
         r.setDatum(java.sql.Date.valueOf(LocalDate.now()).toString());
+        r.setStatus("Verwerkt");
 
         reviewRepository.save(r);
         pand.review(r);

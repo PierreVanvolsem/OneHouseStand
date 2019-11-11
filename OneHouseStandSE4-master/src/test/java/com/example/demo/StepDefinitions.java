@@ -17,12 +17,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 
 public class StepDefinitions {
-    WebDriver driver;
+   /* WebDriver driver;
 
     @Given("^I am signed in as a klant$")
     public void iAmSignedInAsAKlant() throws Throwable {
-        System.setProperty("webdriver.gecko.driver", "D:\\onedrive\\OneDrive - ODISEE\\Fabian\\Jaar 2\\Semester 2\\Software\\w6\\geckodriver.exe");
-        driver = new FirefoxDriver();
+        //System.setProperty("webdriver.gecko.driver", "D:\\onedrive\\OneDrive - ODISEE\\Fabian\\Jaar 2\\Semester 2\\Software\\w6\\geckodriver.exe");
+        //driver = new FirefoxDriver();
+
+        driver = null;
 
         driver.navigate().to("http://localhost:8080/");
 
@@ -92,5 +94,5 @@ public class StepDefinitions {
     public void iCloseTheBrowser() throws Throwable {
         driver.quit();
     }
-
+*/
 }

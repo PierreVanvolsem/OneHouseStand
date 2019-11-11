@@ -15,14 +15,14 @@ import java.util.Collection;
 @Table(name = "USERS")
 @Data
 @RequiredArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PUBLIC, force = true)
+//@NoArgsConstructor(access = AccessLevel.PUBLIC, force = true)
 public class User implements UserDetails {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private final long id;
+    private long id;
 
     @Column(unique = true)
     @NotEmpty(message = "Vul username in aub")

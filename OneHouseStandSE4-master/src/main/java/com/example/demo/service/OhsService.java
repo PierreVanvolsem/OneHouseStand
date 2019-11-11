@@ -53,4 +53,7 @@ public interface OhsService {
 
     Iterable<Review> getReviewsPandById(long id);
     void verwerkMatToevoegen(Mat m, Pand p);
+
+    Review verbergReview(Review review, User user);
+    Review verwerkReview(Review review, User user);
 }
