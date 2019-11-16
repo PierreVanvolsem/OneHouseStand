@@ -181,6 +181,13 @@ public class OhsServiceImplementatie implements OhsService {
     }
 
     @Override
+    public Review creerReview(Pand pand, User user, String beschrijving, int score)
+    {
+        Review review = pand.voegReviewToe(beschrijving, score);
+        return review;
+    }
+
+    @Override
     public Review verbergReview(Review review, User user)
     {
         //TODO Nakijken of user wel een screener is.
