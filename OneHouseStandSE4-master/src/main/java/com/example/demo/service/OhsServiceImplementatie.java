@@ -145,9 +145,10 @@ public class OhsServiceImplementatie implements OhsService {
     }
 
     @Override
-    public void deletePand(Long id) {
+    public Pand deletePand(long id) {
         //Pand p = pandRepository.findById(id);
-        pandRepository.deleteById(id);
+        //pandRepository.deleteById(id);
+        return null;
     }
 
     @Override
@@ -170,6 +171,13 @@ public class OhsServiceImplementatie implements OhsService {
         pand.reserveer(r);
         pandRepository.save(pand);
         return r;
+    }
+
+    @Override
+    public Review creerReview(Pand pand, String beschrijving, int score)
+    {
+        Review review = pand.voegReviewToe(beschrijving, score);
+        return review;
     }
 
     @Override

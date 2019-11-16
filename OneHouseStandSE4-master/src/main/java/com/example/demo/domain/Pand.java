@@ -17,6 +17,7 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -56,7 +57,7 @@ public class Pand implements Serializable {
 
     @OneToMany
     @JsonManagedReference
-    private List<Review> reviews;
+    private List<Review> reviews = new ArrayList<>();
 
     public void keurAf() {
 
@@ -87,6 +88,15 @@ public class Pand implements Serializable {
     public void review(Review r) {
         if (r != null)
             reviews.add(r);
+    }
+
+    public Review voegReviewToe(String beschrijving, int score) {
+        Review review = new Review();
+        review.setContent(beschrijving);
+        review.setRating(score);
+
+        this.reviews.add(review);
+        return review;
     }
 
     /**

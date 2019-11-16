@@ -37,7 +37,7 @@ public interface OhsService {
 
     Review verwerkReview(Review review);
 
-    void deletePand(Long id);
+    Pand deletePand(long id);
 
     Pand updateStatusPand(long id);
 
@@ -54,6 +54,7 @@ public interface OhsService {
     Iterable<Review> getReviewsPandById(long id);
     void verwerkMatToevoegen(Mat m, Pand p);
 
+    Review creerReview(Pand pand, String beschrijving, int score);
     Review verbergReview(Review review, User user);
     Review verwerkReview(Review review, User user);
 }

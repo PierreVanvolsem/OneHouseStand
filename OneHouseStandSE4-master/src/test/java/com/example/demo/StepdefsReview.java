@@ -22,7 +22,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
 public class StepdefsReview {
-
+/*
     private  User tibo;
     private Pand pand;
     private Review review;
@@ -92,5 +92,5 @@ public class StepdefsReview {
     public void zalDeVerwerkteReviewFinalZijn() {
         //todo make final
         assertEquals("Verborgen",review.getStatus());
-    }
+    }*/
 }
