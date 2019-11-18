@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<nav th:fragment="header">
+    <ul>
+        <li><a class="active" th:href="@{/}">Home</a></li>
+        <li><a th:href="@{/aanbod}">Aanbod</a></li>
+        <li style="float:right">
+            <form method="POST" th:action="@{/logout}" style="float: right">
+                <button class="btn btn-danger btn-md logout" name="logout" value="Logout">Sign out</button>
+            </form>
+        </li>
+    </ul>
+</nav>
+</body>
+</html>
+
+<!--<a th:href="@{/aanbod}">Ons aanbod</a> <br>-->

@@ -1,0 +1,110 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header">Header</div>
+
+<div class="container" style="margin: 20px">
+    <div class="text-left">
+        <h1>Pand Details</h1>
+
+        <div class="container">
+            <form method="post" th:action="@{/klant/pand(id=${pand.id})}" th:object="${pand}">
+                <label for="id">Pand id:</label>
+                <input id="id" class="readonly" type="text" th:field="*{id}" readonly="readonly"/>
+                <br>
+                <label for="status">Status:</label>
+                <input id="status" class="readonly" type="text" th:field="*{status}" readonly="readonly"/>
+                <br>
+                <label for="bron">Bron:</label>
+                <input id="bron" class="readonly" type="text" th:field="*{bron}" readonly="readonly"/>
+                <br>
+                <label for="huisnummer">HuisNummer:</label>
+                <input id="huisnummer" readonly="readonly" class="readonly" type="text" th:field="*{huisNummer}">
+                <br>
+                <label for="prijsperuur">PrijsPerUur:</label>
+                <input id="prijsperuur" readonly="readonly" class="readonly" type="text" th:field="*{prijsPerUur}">
+                <br>
+                <label for="straatnaam">StraatNaam:</label>
+                <input id="straatnaam" readonly="readonly" class="readonly" type="text" th:field="*{straatNaam}">
+                <br>
+
+                <h2>Bestaande reservaties</h2>
+                <li th:each="reservatie : ${pand.getReservaties()}">
+                    <span th:text="${reservatie.getAantalPersonen()}">Loading...</span> personen
+                    <span th:text="${reservatie.getEindDatum()}">Loading...</span>
+                </li>
+            </form>
+            <div class="reviews">
+                <h2>Reviews</h2>
+                <ul style="list-style-type: none;">
+                    <article th:each="review : ${reviews}">
+                        <h3 th:text="${review.getTitel()}" contenteditable="false">Loading...</h3>
+                        Bericht: <p th:text="${review.getContent()}" contenteditable="false"></p><br>
+                        Beoordeeld op: <p th:text="${review.getDatum()}" contenteditable="false"></p><br>
+                        Rating: <p th:text="${review.getRating()}" contenteditable="false"></p>/5<br>
+                        Door <p th:text="${review.getGebruiker().getUsername()}" contenteditable="false"></p>
+                    </article>
+                </ul>
+            </div>
+            <h2>Reservatie plaatsen</h2>
+            <form method="post" th:action="@{/klant/reserveerPand(id=${pand.id})}" th:object="${reservatie}">
+                <div th:if="${#fields.hasErrors()}">
+                    <span class="validationError">Gelieve de problemen op te lossen.</span>
+                </div>
+
+                <label for="aantalPersonen">aantalPersonen</label>
+                <input id="aantalPersonen" min="1" type="number" value="0" th:field="*{aantalPersonen}">
+                <span class="validationError" th:if="${#fields.hasErrors('aantalPersonen')}"
+                      th:errors="*{aantalPersonen}">huisnummer error</span>
+                <br>
+                <label for="einddatum">Eind Datum</label>
+                <input id="einddatum" type="date" th:field="*{eindDatum}"/>
+                <span class="validationError" th:if="${#fields.hasErrors('eindDatum')}" th:errors="*{eindDatum}">huisnummer error</span>
+                <br>
+                <input type="submit" class="submit" name="submit" value="Reserveer">
+            </form>
+
+            <h2>Review plaatsen</h2>
+            <form method="post" th:action="@{/klant/reviewPand(id=${pand.id})}" th:object="${review}">
+                <div th:if="${reviewSuccess}" style="color: red; margin-top: 1em; margin-bottom: 1em;">
+                    We hebben je aanvraag ontvangen, gelieve enkele dagen te wachten zodat wij je pand kunnen verwerken.<br/>
+                </div>
+
+                <div th:if="${#fields.hasErrors()}">
+                    <span class="validationError">Gelieve de problemen op te lossen.</span>
+                </div>
+
+
+                <input type="text" placeholder="Titel" th:field="*{titel}">
+                <span class="validationError" th:if="${#fields.hasErrors('titel')}"
+                      th:errors="*{titel}"></span>
+                <br>
+
+
+                <textarea placeholder="Content" th:field="*{content}"></textarea>
+                <span class="validationError" th:if="${#fields.hasErrors('content')}"
+                      th:errors="*{content}"></span>
+                <br>
+
+                <label for="reviewrating">Rating:</label>
+                <input id="reviewrating" min="0" max="5" type="number" th:field="*{rating}">
+                <span class="validationError" th:if="${#fields.hasErrors('rating')}"
+                      th:errors="*{rating}"></span>/5
+                <br>
+
+                <input type="submit" class="submit" name="submit" value="Post review">
+            </form>
+
+        </div>
+
+    </div>
+
+
+</div>
+</body>
+</html>
