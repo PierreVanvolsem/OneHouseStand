@@ -55,6 +55,7 @@ public interface OhsService {
     void verwerkMatToevoegen(Mat m, Pand p);
 
     Review creerReview(Pand pand, String beschrijving, int score);
+    Review creerReview(Pand pand, User user, String beschrijving, int score);
     Review verbergReview(Review review, User user);
     Review verwerkReview(Review review, User user);
 }

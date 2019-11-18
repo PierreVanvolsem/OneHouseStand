@@ -1,4 +1,4 @@
-package com.example.demo;
+/*package com.example.demo;
 
 import com.example.demo.domain.Pand;
 import com.example.demo.domain.Review;
@@ -95,3 +95,4 @@ public class StepDefinitionsReview {
         assertNull(review);
     }
 }
+*/
