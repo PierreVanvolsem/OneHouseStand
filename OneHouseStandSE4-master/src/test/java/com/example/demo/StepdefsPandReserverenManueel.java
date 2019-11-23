@@ -60,7 +60,7 @@ public class StepdefsPandReserverenManueel {
         new WebDriverWait(driver, 2); //pagina kan varieren, dus kan niet dynamisch
     }
 
-    @En("^Tibo is op de pagina van de pand met id (\\d+)$")
+    @En("^Tibo is op de pagina van het pand met id (\\d+)$")
     public void tiboIsOpDePaginaVanDePandMetId(int id) {
         driver.navigate().to("http://localhost:8080/pand?id="+id);
     }
@@ -74,9 +74,9 @@ public class StepdefsPandReserverenManueel {
     public void tiboHetVeldInvuldMet(String elementid, String inhoud) throws Throwable {
         if (elementid == "einddatum"){
             //inhoud = inhoud.replace("/","");
-            driver.findElement(By.id(elementid)).click();
+            //driver.findElement(By.id(elementid)).click();
         }
-        driver.findElement(By.id(elementid)).sendKeys("20","11","2020");
+        driver.findElement(By.id(elementid)).sendKeys("20112020");
     }
 
     @Dan("^staat er een nieuwe lijn onder Bestaande reservaties met \"([^\"]*)\"$")

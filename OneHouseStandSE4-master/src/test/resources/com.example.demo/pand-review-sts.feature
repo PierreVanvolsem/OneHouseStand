@@ -5,7 +5,7 @@
     Een screener kan een onverwerkte review verwerken.
     Een screener kan een onverwerkte review verbergen.
     Een screener kan een verwerkt pand verbergen.
-    Zodra de pand gearchiveerd is zijn de reviews van de pand final.
+    Zodra het pand gearchiveerd is zijn de reviews van het pand final.
 
     Achtergrond:
       Gegeven er is een bestaand pand
