@@ -9,10 +9,12 @@ import cucumber.api.java.nl.Gegeven;
 import org.junit.After;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 
 public class StepdefsPandReserverenManueel {
     private WebDriver driver;
@@ -30,11 +32,11 @@ public class StepdefsPandReserverenManueel {
 
     @After
     public void end(){
-        driver.quit();
+        this.driver.quit();
     }
 
-    @Gegeven("^er is een bestaande pand met id (\\d+) die goedgekeurd is en die geen reservering heeft$")
-    public void erIsEenBestaandePandMetIdDieGoedgekeurdIsEnDieGeenReserveringHeeft(int arg0) {
+    @Gegeven("^er is een bestaand pand met id (\\d+) die goedgekeurd is en die geen reservering heeft$")
+    public void erIsEenBestaandPandMetIdDieGoedgekeurdIsEnDieGeenReserveringHeeft(int arg0) {
         //run script
     }
 
@@ -69,11 +71,12 @@ public class StepdefsPandReserverenManueel {
     }
 
     @En("^Tibo het veld \"([^\"]*)\" invuld  met \"([^\"]*)\"$")
-    public void tiboHetVeldInvuldMet(String elementname, String inhoud) throws Throwable {
-        if (elementname == "einddatum"){
-            inhoud = inhoud.replace("/","");
+    public void tiboHetVeldInvuldMet(String elementid, String inhoud) throws Throwable {
+        if (elementid == "einddatum"){
+            //inhoud = inhoud.replace("/","");
+            driver.findElement(By.id(elementid)).click();
         }
-        driver.findElement(By.id(elementname)).sendKeys(inhoud);
+        driver.findElement(By.id(elementid)).sendKeys("20","11","2020");
     }
 
     @Dan("^staat er een nieuwe lijn onder Bestaande reservaties met \"([^\"]*)\"$")
@@ -91,7 +94,7 @@ public class StepdefsPandReserverenManueel {
     @Gegeven("^de pand met id (\\d+) heeft één reservatie met datum \"([^\"]*)\" en aantal personen (\\d+)$")
     public void dePandMetIdHeeftÉénReservatieMetDatumEnAantalPersonen(int arg0, String arg1, int arg2) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        //throw new PendingException();
         //todo script
     }
 
@@ -99,4 +102,6 @@ public class StepdefsPandReserverenManueel {
     public void tiboOpReserveerKlikt() {
         driver.findElement(By.name("submit")).click();
     }
+
+
 }
