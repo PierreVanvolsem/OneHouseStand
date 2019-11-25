@@ -6,4 +6,6 @@ public class AanbodPage extends AbstractPage {
     public AanbodPage(WebDriver driver) {
         super(driver);
     }
+
+
 }

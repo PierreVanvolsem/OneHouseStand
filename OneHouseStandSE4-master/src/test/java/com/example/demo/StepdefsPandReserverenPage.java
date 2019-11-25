@@ -1,24 +1,30 @@
 package com.example.demo;
 
+import com.example.demo.pageobject.AanbodPage;
+import com.example.demo.pageobject.LoginPage;
+import com.example.demo.pageobject.PandPage;
+import com.example.demo.pageobject.HomePage;
 import cucumber.api.PendingException;
-import cucumber.api.java.Before;
 import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import cucumber.api.java.nl.Als;
 import cucumber.api.java.nl.Dan;
 import cucumber.api.java.nl.En;
 import cucumber.api.java.nl.Gegeven;
-
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
-public class StepdefsPandReserverenManueel {
-    /*private WebDriver driver;
+public class StepdefsPandReserverenPage {
+    private WebDriver driver;
+    private PandPage pandpage;
+    private HomePage homepage;
+    private AanbodPage aanbodPage;
+    private LoginPage loginPage;
 
     @Before("@PandReserveren")
     public void setUp() {
@@ -29,6 +35,8 @@ public class StepdefsPandReserverenManueel {
         System.setProperty("webdriver.gecko.driver", pathToGeckoDriver );
         //Instantiating driver object and launching browser
         driver = new FirefoxDriver();
+
+        homepage = new HomePage(driver);
     }
 
     @After("@PandReserveren")
@@ -43,57 +51,42 @@ public class StepdefsPandReserverenManueel {
 
     @En("^er is een huurder Tibo ingelogd\\.$")
     public void erIsEenHuurderTiboIngelogd() {
-        driver.navigate().to("http://localhost:8080/");
-
-        driver.findElement(By.name("logout")).click();
-
-        new WebDriverWait(driver, 10).until(ExpectedConditions
-                .textToBePresentInElementLocated(By.tagName("body"), "Je bent uitgelogd"));
-        driver.navigate().to("http://localhost:8080/login");
-
-        new WebDriverWait(driver, 10).until(ExpectedConditions
-                .textToBePresentInElementLocated(By.tagName("body"), "login page"));
-
-        driver.findElement(By.id("username")).sendKeys("tibo");
-        driver.findElement(By.id("password")).sendKeys("tibo");
-        driver.findElement(By.name("submit")).click();
-
-        new WebDriverWait(driver, 2); //pagina kan varieren, dus kan niet dynamisch
+        homepage.navigateToHomePage();
+        homepage.logout();
+        loginPage = homepage.navigateToLoginPage();
+        loginPage.login();
     }
 
     @En("^Tibo is op de pagina van het pand met id (\\d+)$")
     public void tiboIsOpDePaginaVanDePandMetId(int id) {
-        driver.navigate().to("http://localhost:8080/pand?id="+id);
+        pandpage = loginPage.navigateToAanbod(id);
     }
 
     @Als("^Tibo het veld \"([^\"]*)\" invuld met (\\d+)$")
     public void tiboHetVeldInvuldMet(String elementname, int inhoud) throws Throwable {
-        driver.findElement(By.name(elementname)).sendKeys(Integer.toString(inhoud));
+        if (elementname == "aantalPersonen")
+            pandpage.enterAantalPersonenVanReservatie(inhoud);
     }
 
     @En("^Tibo het veld \"([^\"]*)\" invuld  met \"([^\"]*)\"$")
     public void tiboHetVeldInvuldMet(String elementid, String inhoud) throws Throwable {
-        String[] parts = inhoud.split("/");
-        inhoud = parts[2] +"-"+parts[1]+"-"+parts[0];
-        driver.findElement(By.id(elementid)).click();
-        driver.findElement(By.id(elementid)).sendKeys(inhoud);
+        if (elementid == "einddatum")
+            pandpage.enterDatumReservatie(inhoud);
     }
 
     @Dan("^staat er een nieuwe lijn onder Bestaande reservaties met \"([^\"]*)\"$")
     public void staatErEenNieuweLijnOnderBestaandeReservatiesMet(String reservatie) throws Throwable {
-        String bodytext = driver.findElement(By.tagName("body")).getText();
-        Assert.assertTrue(bodytext.contains(reservatie));
+        Assert.assertTrue(pandpage.verifyBestaandereservatie(reservatie));
     }
 
     @Dan("^staat er op de error pagina \"([^\"]*)\"$")
     public void staatErOpDeErrorPagina(String errorbericht) throws Throwable {
-        String bodytext = driver.findElement(By.tagName("body")).getText();
-        Assert.assertTrue(bodytext.contains(errorbericht));
+        Assert.assertTrue(pandpage.verifyError(errorbericht));
     }
 
     @En("^Tibo op reserveer Klikt$")
     public void tiboOpReserveerKlikt() {
-        driver.findElement(By.name("submit")).click();
+        pandpage.reserveer();
     }
 
     @Gegeven("^het pand met id (\\d+) heeft één reservatie met datum \"([^\"]*)\" en aantal personen (\\d+)$")
@@ -101,5 +94,5 @@ public class StepdefsPandReserverenManueel {
         // Write code here that turns the phrase above into concrete actions
         throw new PendingException();
         //todo script
-    }*/
+    }
 }
