@@ -64,7 +64,7 @@ public class StepdefsPandReserverenManueel {
         this.driver.quit();
     }
 
-    @Gegeven("^er is een bestaand pand met id (\\d+) die goedgekeurd is en die geen reservering heeft$")
+    /*@Gegeven("^er is een bestaand pand met id (\\d+) die goedgekeurd is en die geen reservering heeft$")
     public void erIsEenBestaandPandMetIdDieGoedgekeurdIsEnDieGeenReserveringHeeft(int arg0) {
         //run script
     }

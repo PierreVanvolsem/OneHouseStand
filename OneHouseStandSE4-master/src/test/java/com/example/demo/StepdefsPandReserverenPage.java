@@ -25,18 +25,46 @@ public class StepdefsPandReserverenPage {
     private HomePage homepage;
     private AanbodPage aanbodPage;
     private LoginPage loginPage;
+    private static boolean dunit = false;
 
     @Before("@PandReserveren")
     public void setUp() {
-        //todo clean data
+        if(!dunit) {
+            String pathToGeckoDriver = "C:\\OracleJava\\geckodriver.exe";
+            //Setting webdriver.gecko.driver property
+            System.setProperty("webdriver.gecko.driver", pathToGeckoDriver);
+            //Instantiating driver object and launching browser
+            driver = new FirefoxDriver();
 
-        String pathToGeckoDriver = "C:\\Users\\Pierre\\Downloads\\geckodriver-v0.26.0-win64\\geckodriver.exe";
-        //Setting webdriver.gecko.driver property
-        System.setProperty("webdriver.gecko.driver", pathToGeckoDriver );
-        //Instantiating driver object and launching browser
-        driver = new FirefoxDriver();
+            //todo clean data
+            //create tibo
+            driver.navigate().to("http://localhost:8080/");
+            driver.findElement(By.id("lijstVanPanden")).click();
+            driver.findElement(By.id("createAccount")).click();
+            driver.findElement(By.id("username")).sendKeys("tibo");
+            driver.findElement(By.id("password")).sendKeys("tibo");
+            driver.findElement(By.id("firstName")).sendKeys("tibo");
+            driver.findElement(By.id("lastName")).sendKeys("tibo");
+            driver.findElement(By.id("email")).sendKeys("tibo@gmail.com");
+            driver.findElement(By.name("registreer")).click();
 
-        homepage = new HomePage(driver);
+            // login tibo
+            driver.findElement(By.id("aanbod")).click();
+            driver.findElement(By.id("newPand")).click();
+            driver.findElement(By.id("username")).sendKeys("tibo");
+            driver.findElement(By.id("password")).sendKeys("tibo");
+            driver.findElement(By.name("login")).click();
+
+            // pand aanmaken
+            driver.findElement(By.id("huisNummer")).sendKeys("4");
+            driver.findElement(By.id("prijsPerUur")).sendKeys("44");
+            driver.findElement(By.id("straatNaam")).sendKeys("hoogstraat");
+            driver.findElement(By.name("toevoegen")).click();
+
+            homepage = new HomePage(driver);
+
+            dunit = true;
+        }
     }
 
     @After("@PandReserveren")
