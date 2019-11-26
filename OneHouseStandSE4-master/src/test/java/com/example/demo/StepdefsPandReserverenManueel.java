@@ -16,6 +16,11 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 
 public class StepdefsPandReserverenManueel {
     private WebDriver driver;
@@ -55,6 +60,23 @@ public class StepdefsPandReserverenManueel {
             driver.findElement(By.id("straatNaam")).sendKeys("hoogstraat");
             driver.findElement(By.name("toevoegen")).click();
 
+            // pand goedkeuren
+            String jdbcUrl = "jdbc:mysql://localhost:3306/ohs4";
+            String username = "root";
+            String password = "";
+            String sql = "update panden set status='goedgekeurd' where id=1";
+
+            try (Connection conn = DriverManager.getConnection(jdbcUrl, username, password);
+                 Statement stmt = conn.createStatement())
+            {
+                stmt.executeUpdate(sql);
+                System.out.println("Database updated successfully");
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+
             dunit = true;
         }
     }
@@ -64,7 +86,7 @@ public class StepdefsPandReserverenManueel {
         this.driver.quit();
     }
 
-    /*@Gegeven("^er is een bestaand pand met id (\\d+) die goedgekeurd is en die geen reservering heeft$")
+    @Gegeven("^er is een bestaand pand met id (\\d+) die goedgekeurd is en die geen reservering heeft$")
     public void erIsEenBestaandPandMetIdDieGoedgekeurdIsEnDieGeenReserveringHeeft(int arg0) {
         //run script
     }
@@ -72,20 +94,15 @@ public class StepdefsPandReserverenManueel {
     @En("^er is een huurder Tibo ingelogd\\.$")
     public void erIsEenHuurderTiboIngelogd() {
         driver.navigate().to("http://localhost:8080/");
-
         driver.findElement(By.name("logout")).click();
-
         new WebDriverWait(driver, 10).until(ExpectedConditions
                 .textToBePresentInElementLocated(By.tagName("body"), "Je bent uitgelogd"));
         driver.navigate().to("http://localhost:8080/login");
-
         new WebDriverWait(driver, 10).until(ExpectedConditions
                 .textToBePresentInElementLocated(By.tagName("body"), "login page"));
-
         driver.findElement(By.id("username")).sendKeys("tibo");
         driver.findElement(By.id("password")).sendKeys("tibo");
         driver.findElement(By.name("login")).click();
-
         new WebDriverWait(driver, 2); //pagina kan varieren, dus kan niet dynamisch
     }
 
@@ -129,5 +146,5 @@ public class StepdefsPandReserverenManueel {
         // Write code here that turns the phrase above into concrete actions
         throw new PendingException();
         //todo script
-    }*/
+    }
 }

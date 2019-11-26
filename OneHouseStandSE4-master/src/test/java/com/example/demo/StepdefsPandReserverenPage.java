@@ -27,7 +27,7 @@ public class StepdefsPandReserverenPage {
     private LoginPage loginPage;
     private static boolean dunit = false;
 
-    @Before("@PandReserveren")
+    /*@Before("@PandReserveren")
     public void setUp() {
         if(!dunit) {
             String pathToGeckoDriver = "C:\\OracleJava\\geckodriver.exe";
@@ -122,5 +122,5 @@ public class StepdefsPandReserverenPage {
         // Write code here that turns the phrase above into concrete actions
         throw new PendingException();
         //todo script
-    }
+    }*/
 }
