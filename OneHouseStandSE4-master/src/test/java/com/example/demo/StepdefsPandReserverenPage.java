@@ -20,7 +20,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class StepdefsPandReserverenPage {
-    private WebDriver driver;
+    /*private WebDriver driver;
     private PandPage pandpage;
     private HomePage homepage;
     private AanbodPage aanbodPage;
@@ -94,5 +94,5 @@ public class StepdefsPandReserverenPage {
         // Write code here that turns the phrase above into concrete actions
         throw new PendingException();
         //todo script
-    }
+    }*/
 }
