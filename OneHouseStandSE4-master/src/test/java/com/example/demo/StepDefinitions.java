@@ -21,7 +21,7 @@ public class StepDefinitions {
 
     @Given("^I am signed in as a klant$")
     public void iAmSignedInAsAKlant() throws Throwable {
-        System.setProperty("webdriver.gecko.driver", "D:\\onedrive\\OneDrive - ODISEE\\Fabian\\Jaar 2\\Semester 2\\Software\\w6\\geckodriver.exe");
+        System.setProperty("webdriver.gecko.driver", "C:\\OracleJava\\geckodriver.exe");
         driver = new FirefoxDriver();
 
         driver.navigate().to("http://localhost:8080/");

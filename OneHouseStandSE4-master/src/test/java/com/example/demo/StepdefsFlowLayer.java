@@ -25,7 +25,7 @@ public class StepdefsFlowLayer {
     public void setUp() {
         //todo clean data
 
-        String pathToGeckoDriver = "C:\\Users\\Pierre\\Downloads\\geckodriver-v0.26.0-win64\\geckodriver.exe";
+        String pathToGeckoDriver = "C:\\OracleJava\\geckodriver.exe";
         //Setting webdriver.gecko.driver property
         System.setProperty("webdriver.gecko.driver", pathToGeckoDriver );
         //Instantiating driver object and launching browser
