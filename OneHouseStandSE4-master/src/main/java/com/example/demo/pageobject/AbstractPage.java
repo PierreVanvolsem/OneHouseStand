@@ -17,6 +17,11 @@ public abstract class AbstractPage {
         return new HomePage(driver);
     }
 
+    public RegisterPage navigateToRegisterPage(){
+        driver.navigate().to("http://localhost:8080/registreer");
+        return new RegisterPage(driver);
+    }
+
     public String getPageText(){
         return  driver.findElement(By.tagName("body")).getText();
     }

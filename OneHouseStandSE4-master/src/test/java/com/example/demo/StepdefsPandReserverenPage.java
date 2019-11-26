@@ -119,8 +119,23 @@ public class StepdefsPandReserverenPage {
 
     @Gegeven("^het pand met id (\\d+) heeft één reservatie met datum \"([^\"]*)\" en aantal personen (\\d+)$")
     public void hetPandMetIdHeeftÉénReservatieMetDatumEnAantalPersonen(int arg0, String arg1, int arg2) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
-        //todo script
+        String jdbcUrl = "jdbc:mysql://localhost:3306/ohs4";
+        String username = "root";
+        String password = "";
+
+        String sqlCreateReservation = "INSERT INTO `reservaties` (`id`, `aantal_personen`, `eind_datum`) VALUES (1, '5', '20-11-2020');";
+        String sqlAddReservationtonPand  = "INSERT INTO `panden_reservaties` (`pand_id`, `reservaties_id`) VALUES ('1', '1');";
+
+        try (Connection conn = DriverManager.getConnection(jdbcUrl, username, password);
+             Statement stmt = conn.createStatement())
+        {
+            stmt.executeUpdate(sqlCreateReservation);
+            stmt.executeUpdate(sqlAddReservationtonPand);
+            System.out.println("Database updated successfully");
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
     }*/
 }

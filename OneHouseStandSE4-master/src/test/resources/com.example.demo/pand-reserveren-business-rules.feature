@@ -1,5 +1,5 @@
 # language: nl
-
+@PandReserverenLayered
 Functionaliteit: Een reservatie voor een pand maken.
 
   Achtergrond:
@@ -20,7 +20,6 @@ Functionaliteit: Een reservatie voor een pand maken.
     Dan staat er op een error bericht
 
   Scenario: het pand heeft nog geen reservering op de gegeven datum en de datum is in het verleden en het aantal personen is tussen 1 en 99
-    Gegeven het pand heeft één reservatie met datum een geldige datum en een geldig aantal personen
     Als de huurder het veld "aantalPersonen" invuld met een geldig getal
     En de huurder het veld "einddatum" invuld  met een ongeldige datum
     En de huurder op reserveer klikt

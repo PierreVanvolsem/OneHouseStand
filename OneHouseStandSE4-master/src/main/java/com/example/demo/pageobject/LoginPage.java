@@ -16,7 +16,7 @@ public class LoginPage extends AbstractPage {
                 .textToBePresentInElementLocated(By.tagName("body"), "login page"));
         driver.findElement(By.id("username")).sendKeys("tibo");
         driver.findElement(By.id("password")).sendKeys("tibo");
-        driver.findElement(By.name("submit")).click();
+        driver.findElement(By.name("login")).click();
 
         new WebDriverWait(driver, 2); //pagina kan varieren, dus kan niet dynamisch
     }

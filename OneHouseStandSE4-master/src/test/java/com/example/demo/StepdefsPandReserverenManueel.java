@@ -28,7 +28,7 @@ public class StepdefsPandReserverenManueel {
 
     @Before("@PandReserveren")
     public void setUp() {
-        if(!dunit) {
+        //if(!dunit) {
             String pathToGeckoDriver = "C:\\Users\\Pierre\\Downloads\\geckodriver-v0.26.0-win64\\geckodriver.exe";
             //Setting webdriver.gecko.driver property
             System.setProperty("webdriver.gecko.driver", pathToGeckoDriver);
@@ -37,9 +37,7 @@ public class StepdefsPandReserverenManueel {
 
             //todo clean data
             //create tibo
-            driver.navigate().to("http://localhost:8080/");
-            driver.findElement(By.id("lijstVanPanden")).click();
-            driver.findElement(By.id("createAccount")).click();
+            driver.navigate().to("http://localhost:8080/registreer");
             driver.findElement(By.id("username")).sendKeys("tibo");
             driver.findElement(By.id("password")).sendKeys("tibo");
             driver.findElement(By.id("firstName")).sendKeys("tibo");
@@ -48,28 +46,36 @@ public class StepdefsPandReserverenManueel {
             driver.findElement(By.name("registreer")).click();
 
             // login tibo
-            driver.findElement(By.id("aanbod")).click();
-            driver.findElement(By.id("newPand")).click();
+            driver.navigate().to("http://localhost:8080/login");
             driver.findElement(By.id("username")).sendKeys("tibo");
             driver.findElement(By.id("password")).sendKeys("tibo");
             driver.findElement(By.name("login")).click();
 
             // pand aanmaken
-            driver.findElement(By.id("huisNummer")).sendKeys("4");
+            /*driver.findElement(By.id("huisNummer")).sendKeys("4");
             driver.findElement(By.id("prijsPerUur")).sendKeys("44");
             driver.findElement(By.id("straatNaam")).sendKeys("hoogstraat");
-            driver.findElement(By.name("toevoegen")).click();
+            driver.findElement(By.name("toevoegen")).click();*/
 
-            // pand goedkeuren
+            //create pand
+            //eigenaar is NULL
             String jdbcUrl = "jdbc:mysql://localhost:3306/ohs4";
             String username = "root";
             String password = "";
-            String sql = "update panden set status='goedgekeurd' where id=1";
+            String sqlDeleteUser = "DELETE FROM `users`";
+            String sqlDeletePanden = "DELETE FROM `panden`";
+            String sqlDeleteReservations = "DELETE FROM `panden_reviews`";
+
+            String sqlAddPand = "INSERT INTO `panden` (`id`, `bron`, `huis_nummer`, `prijs_per_uur`, `status`, `straat_naam`, `eigenaar_id`) VALUES (1, 'bron', '25', '10', 'goedgekeurd', 'stormstraat', NULL);";
 
             try (Connection conn = DriverManager.getConnection(jdbcUrl, username, password);
                  Statement stmt = conn.createStatement())
             {
-                stmt.executeUpdate(sql);
+                stmt.executeUpdate(sqlDeleteUser);
+                stmt.executeUpdate(sqlDeletePanden);
+                stmt.executeUpdate(sqlDeleteReservations);
+                stmt.executeUpdate(sqlAddPand);
+                stmt.executeUpdate(sqlDeleteUser);
                 System.out.println("Database updated successfully");
             }
             catch (SQLException e)
@@ -77,8 +83,8 @@ public class StepdefsPandReserverenManueel {
                 e.printStackTrace();
             }
 
-            dunit = true;
-        }
+            //dunit = true;
+        //}
     }
 
     @After("@PandReserveren")
@@ -143,8 +149,23 @@ public class StepdefsPandReserverenManueel {
 
     @Gegeven("^het pand met id (\\d+) heeft één reservatie met datum \"([^\"]*)\" en aantal personen (\\d+)$")
     public void hetPandMetIdHeeftÉénReservatieMetDatumEnAantalPersonen(int arg0, String arg1, int arg2) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
-        //todo script
+        String jdbcUrl = "jdbc:mysql://localhost:3306/ohs4";
+        String username = "root";
+        String password = "";
+
+        String sqlCreateReservation = "INSERT INTO `reservaties` (`id`, `aantal_personen`, `eind_datum`) VALUES (1, '5', '20-11-2020');";
+        String sqlAddReservationtonPand  = "INSERT INTO `panden_reservaties` (`pand_id`, `reservaties_id`) VALUES ('1', '1');";
+
+        try (Connection conn = DriverManager.getConnection(jdbcUrl, username, password);
+             Statement stmt = conn.createStatement())
+        {
+            stmt.executeUpdate(sqlCreateReservation);
+            stmt.executeUpdate(sqlAddReservationtonPand);
+            System.out.println("Database updated successfully");
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
     }
 }
