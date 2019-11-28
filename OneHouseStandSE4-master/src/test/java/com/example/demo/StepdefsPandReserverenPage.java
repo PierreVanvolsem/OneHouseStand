@@ -20,14 +20,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class StepdefsPandReserverenPage {
-    /*private WebDriver driver;
+    private WebDriver driver;
     private PandPage pandpage;
     private HomePage homepage;
     private AanbodPage aanbodPage;
     private LoginPage loginPage;
     private static boolean dunit = false;
 
-    /*@Before("@PandReserveren")
+    @Before("@PandReserveren")
     public void setUp() {
         if(!dunit) {
             String pathToGeckoDriver = "C:\\OracleJava\\geckodriver.exe";
@@ -69,7 +69,7 @@ public class StepdefsPandReserverenPage {
 
     @After("@PandReserveren")
     public void end(){
-        this.driver.quit();
+        homepage.closeBrowser();
     }
 
     @Gegeven("^er is een bestaand pand met id (\\d+) die goedgekeurd is en die geen reservering heeft$")

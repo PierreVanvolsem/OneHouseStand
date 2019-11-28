@@ -63,7 +63,7 @@ public class StepdefsFlowLayer {
 
     @After("@PandReserverenLayered")
     public void end(){
-        this.driver.quit();
+        homepage.closeBrowser();
     }
 
     @Gegeven("^er is een bestaand pand die geldig is en die geen reservering heeft$")
